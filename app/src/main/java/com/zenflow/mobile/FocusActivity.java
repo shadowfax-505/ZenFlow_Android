@@ -1,14 +1,24 @@
 package com.zenflow.mobile;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.zenflow.mobile.databinding.ActivityFocusBinding;
 
 public class FocusActivity extends AppCompatActivity {
 
     private ActivityFocusBinding binding;
     private FocusViewModel viewModel;
+
+    private final SharedPreferences.OnSharedPreferenceChangeListener prefListener = (prefs, key) -> {
+        if (SettingsStore.KEY_FOCUS_DURATION_MIN.equals(key)) {
+            int minutes = SettingsStore.getFocusDurationMinutes(this);
+            viewModel.setDurationMinutes(minutes);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +43,20 @@ public class FocusActivity extends AppCompatActivity {
         });
 
         binding.resetBtn.setOnClickListener(v -> viewModel.reset());
+
+        int minutes = SettingsStore.getFocusDurationMinutes(this);
+        viewModel.setDurationMinutes(minutes);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SettingsStore.prefs(this).registerOnSharedPreferenceChangeListener(prefListener);
+    }
+
+    @Override
+    protected void onStop() {
+        SettingsStore.prefs(this).unregisterOnSharedPreferenceChangeListener(prefListener);
+        super.onStop();
     }
 }
