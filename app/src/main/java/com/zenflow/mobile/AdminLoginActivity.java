@@ -27,6 +27,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         EditText etAdminPass = findViewById(R.id.etAdminPass);
         Button btnAdminLogin = findViewById(R.id.btnAdminLogin);
 
+
         View registerPanel = findViewById(R.id.registerPanel);
         EditText etNewUsername = findViewById(R.id.etNewUsername);
         EditText etNewPassword = findViewById(R.id.etNewPassword);
