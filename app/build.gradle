@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'androidx.room' version '2.6.1'
 }
 
 android {
@@ -31,9 +30,6 @@ android {
     }
 }
 
-room {
-    schemaDirectory "$projectDir/schemas"
-}
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
