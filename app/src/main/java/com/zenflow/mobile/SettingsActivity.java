@@ -30,8 +30,11 @@ public class SettingsActivity extends AppCompatActivity {
         focusSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                int displayProgress = Math.max(1, progress);
-                focusDurationLabel.setText(displayProgress + " minutes");
+                int minutes = Math.max(1, progress);
+                focusDurationLabel.setText(minutes + " minutes");
+                if (fromUser) {
+                    SettingsStore.setFocusDurationMinutes(SettingsActivity.this, minutes);
+                }
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }

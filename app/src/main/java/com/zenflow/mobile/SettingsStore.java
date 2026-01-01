@@ -6,15 +6,15 @@ import android.content.SharedPreferences;
 
 public final class SettingsStore {
 
-    private static final String PREFS_NAME = "zenflow_settings";
-    private static final String KEY_FOCUS_DURATION_MIN = "focus_duration_min";
+    public static final String PREFS_NAME = "zenflow_settings";
+    public static final String KEY_FOCUS_DURATION_MIN = "focus_duration_min";
     private static final int DEFAULT_FOCUS_DURATION_MIN = 25;
 
     private SettingsStore() {
 
     }
 
-    private static SharedPreferences prefs(Context context) {
+    public static SharedPreferences prefs(Context context) {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
@@ -26,4 +26,3 @@ public final class SettingsStore {
         prefs(context).edit().putInt(KEY_FOCUS_DURATION_MIN, minutes).apply();
     }
 }
-
