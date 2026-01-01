@@ -89,7 +89,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         for (long b : buckets) {
             View bar = new View(this);
-            int height = (int) ((b * 150.0) / max); // scale to max 150dp approx
+            int height = (int) ((b * 150.0) / max);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, dpToPx(height), 1f);
             params.setMargins(dpToPx(4), 0, dpToPx(4), 0);
             bar.setLayoutParams(params);

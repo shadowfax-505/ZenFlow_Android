@@ -1,26 +1,26 @@
 [
     {
-        "merged": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-mergeDebugResources-28:/layout/activity_settings.xml",
-        "source": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-main-31:/layout/activity_settings.xml"
+        "merged": "com.zenflow.mobile.app-mergeDebugResources-28:/layout/activity_admin_login.xml",
+        "source": "com.zenflow.mobile.app-main-31:/layout/activity_admin_login.xml"
     },
     {
-        "merged": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-mergeDebugResources-28:/layout/activity_focus.xml",
-        "source": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-main-31:/layout/activity_focus.xml"
+        "merged": "com.zenflow.mobile.app-mergeDebugResources-28:/layout/activity_focus.xml",
+        "source": "com.zenflow.mobile.app-main-31:/layout/activity_focus.xml"
     },
     {
         "merged": "com.zenflow.mobile.app-mergeDebugResources-28:/layout/activity_main.xml",
         "source": "com.zenflow.mobile.app-main-31:/layout/activity_main.xml"
     },
     {
-        "merged": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-mergeDebugResources-28:/layout/activity_main.xml",
-        "source": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-main-31:/layout/activity_main.xml"
-    },
-    {
-        "merged": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-mergeDebugResources-28:/layout/activity_dashboard.xml",
-        "source": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-main-31:/layout/activity_dashboard.xml"
+        "merged": "com.zenflow.mobile.app-mergeDebugResources-28:/layout/activity_settings.xml",
+        "source": "com.zenflow.mobile.app-main-31:/layout/activity_settings.xml"
     },
     {
         "merged": "com.zenflow.mobile.app-mergeDebugResources-28:/layout/activity_dashboard.xml",
         "source": "com.zenflow.mobile.app-main-31:/layout/activity_dashboard.xml"
+    },
+    {
+        "merged": "com.zenflow.mobile.app-mergeDebugResources-28:/layout/activity_login.xml",
+        "source": "com.zenflow.mobile.app-main-31:/layout/activity_login.xml"
     }
 ]

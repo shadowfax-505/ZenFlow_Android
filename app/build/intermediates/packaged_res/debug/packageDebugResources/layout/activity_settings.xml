@@ -86,7 +86,28 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Switch account"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Switch
+                android:id="@+id/switchAccount"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
         <Button
             android:id="@+id/saveSettingsBtn"
             android:text="Save Settings"

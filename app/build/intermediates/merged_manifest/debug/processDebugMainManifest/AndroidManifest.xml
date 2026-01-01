@@ -22,13 +22,9 @@
         android:debuggable="true"
         android:extractNativeLibs="false"
         android:label="ZenFlow"
-        android:testOnly="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
-        <activity android:name="com.zenflow.mobile.SettingsActivity" />
-        <activity android:name="com.zenflow.mobile.DashboardActivity" />
-        <activity android:name="com.zenflow.mobile.FocusActivity" />
         <activity
-            android:name="com.zenflow.mobile.MainActivity"
+            android:name="com.zenflow.mobile.LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +32,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.zenflow.mobile.AdminLoginActivity" />
+        <activity android:name="com.zenflow.mobile.SettingsActivity" />
+        <activity android:name="com.zenflow.mobile.DashboardActivity" />
+        <activity android:name="com.zenflow.mobile.FocusActivity" />
+        <activity android:name="com.zenflow.mobile.MainActivity" />
 
         <service
             android:name="androidx.room.MultiInstanceInvalidationService"

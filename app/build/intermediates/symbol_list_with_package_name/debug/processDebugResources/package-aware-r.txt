@@ -995,8 +995,12 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btnAdmin
+id btnAdminLogin
 id btnDashboard
 id btnFocus
+id btnLogin
+id btnRegisterUser
 id btnSettings
 id buttonPanel
 id cache_measures
@@ -1049,6 +1053,12 @@ id easeOut
 id east
 id edit_query
 id end
+id etAdminPass
+id etAdminUser
+id etNewPassword
+id etNewUsername
+id etPassword
+id etUsername
 id expand_activities_button
 id expanded_menu
 id flip
@@ -1124,6 +1134,7 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id registerPanel
 id resetBtn
 id reverseSawtooth
 id right
@@ -1177,6 +1188,7 @@ id stop
 id submenuarrow
 id submit_area
 id supportScrollUp
+id switchAccount
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -1207,6 +1219,9 @@ id totalSessions
 id transitionToEnd
 id transitionToStart
 id triangle
+id tvHint
+id tvSubtitle
+id tvTitle
 id unchecked
 id uniform
 id up
@@ -1267,8 +1282,10 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_admin_login
 layout activity_dashboard
 layout activity_focus
+layout activity_login
 layout activity_main
 layout activity_settings
 layout custom_dialog
