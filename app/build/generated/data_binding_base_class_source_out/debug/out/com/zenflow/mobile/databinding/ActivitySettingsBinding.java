@@ -35,17 +35,21 @@ public final class ActivitySettingsBinding implements ViewBinding {
   public final Switch soundSwitch;
 
   @NonNull
+  public final Switch switchAccount;
+
+  @NonNull
   public final Switch vibrationSwitch;
 
   private ActivitySettingsBinding(@NonNull ScrollView rootView,
       @NonNull TextView focusDurationLabel, @NonNull SeekBar focusDurationSeek,
-      @NonNull Button saveSettingsBtn, @NonNull Switch soundSwitch,
+      @NonNull Button saveSettingsBtn, @NonNull Switch soundSwitch, @NonNull Switch switchAccount,
       @NonNull Switch vibrationSwitch) {
     this.rootView = rootView;
     this.focusDurationLabel = focusDurationLabel;
     this.focusDurationSeek = focusDurationSeek;
     this.saveSettingsBtn = saveSettingsBtn;
     this.soundSwitch = soundSwitch;
+    this.switchAccount = switchAccount;
     this.vibrationSwitch = vibrationSwitch;
   }
 
@@ -100,6 +104,12 @@ public final class ActivitySettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.switchAccount;
+      Switch switchAccount = ViewBindings.findChildViewById(rootView, id);
+      if (switchAccount == null) {
+        break missingId;
+      }
+
       id = R.id.vibrationSwitch;
       Switch vibrationSwitch = ViewBindings.findChildViewById(rootView, id);
       if (vibrationSwitch == null) {
@@ -107,7 +117,7 @@ public final class ActivitySettingsBinding implements ViewBinding {
       }
 
       return new ActivitySettingsBinding((ScrollView) rootView, focusDurationLabel,
-          focusDurationSeek, saveSettingsBtn, soundSwitch, vibrationSwitch);
+          focusDurationSeek, saveSettingsBtn, soundSwitch, switchAccount, vibrationSwitch);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
