@@ -16,6 +16,7 @@ public class AdminLoginActivity extends AppCompatActivity {
     private boolean adminAuthed = false;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
