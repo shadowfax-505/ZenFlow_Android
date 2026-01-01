@@ -1,0 +1,4 @@
+com.zenflow.mobile.test.app-androidTest-0 /Users/muttakinrahman/Downloads/ZenFlowMobile/app/build/generated/res/resValues/androidTest/debug
+com.zenflow.mobile.test.app-mergeDebugAndroidTestResources-1 /Users/muttakinrahman/Downloads/ZenFlowMobile/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.zenflow.mobile.test.app-mergeDebugAndroidTestResources-2 /Users/muttakinrahman/Downloads/ZenFlowMobile/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.zenflow.mobile.test.app-debugAndroidTest-3 /Users/muttakinrahman/Downloads/ZenFlowMobile/app/build/intermediates/merged_res/debugAndroidTest/mergeDebugAndroidTestResources

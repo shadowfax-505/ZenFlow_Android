@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-debug-29:/layout_activity_focus.xml.flat",
+        "source": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-main-31:/layout/activity_focus.xml"
+    },
+    {
+        "merged": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-debug-29:/layout_activity_main.xml.flat",
+        "source": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-main-31:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.zenflow.mobile.app-debug-29:/layout_activity_dashboard.xml.flat",
+        "source": "com.zenflow.mobile.app-main-31:/layout/activity_dashboard.xml"
+    },
+    {
+        "merged": "com.zenflow.mobile.app-debug-29:/layout_activity_main.xml.flat",
+        "source": "com.zenflow.mobile.app-main-31:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-debug-29:/layout_activity_settings.xml.flat",
+        "source": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-main-31:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-debug-29:/layout_activity_dashboard.xml.flat",
+        "source": "/Users/muttakinrahman/.gradle/daemon/9.2.1/com.zenflow.mobile.app-main-31:/layout/activity_dashboard.xml"
+    }
+]

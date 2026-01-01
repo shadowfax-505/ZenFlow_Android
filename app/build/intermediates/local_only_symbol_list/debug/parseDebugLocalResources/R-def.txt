@@ -1,0 +1,22 @@
+R_DEF: Internal format may change without notice
+local
+id appUsageChart
+id btnDashboard
+id btnFocus
+id btnSettings
+id completedSessions
+id focusChart
+id focusDurationLabel
+id focusDurationSeek
+id pauseResumeBtn
+id resetBtn
+id saveSettingsBtn
+id soundSwitch
+id timerText
+id totalSessions
+id vibrationSwitch
+layout activity_dashboard
+layout activity_focus
+layout activity_main
+layout activity_settings
+string app_name
