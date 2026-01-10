@@ -115,5 +115,57 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!-- Usage categories thresholds -->
+        <TextView
+            android:text="Daily Usage Categories"
+            android:textColor="#AAAAAA"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Cut back threshold"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <SeekBar
+            android:id="@+id/cutBackSeek"
+            android:max="360"
+            android:progress="60"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/cutBackLabel"
+            android:text="60 minutes/day"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Seriously addicted threshold"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <SeekBar
+            android:id="@+id/seriouslyAddictedSeek"
+            android:max="720"
+            android:progress="120"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/seriouslyAddictedLabel"
+            android:text="120 minutes/day"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </ScrollView>
