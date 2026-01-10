@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">323728134662</string>
+    <string name="google_api_key" translatable="false">AIzaSyCCdLI7dil3-XSw7YgkopNRDRVQypXJOqI</string>
+    <string name="google_app_id" translatable="false">1:323728134662:android:38a75fc7b8f648c0b6e987</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCCdLI7dil3-XSw7YgkopNRDRVQypXJOqI</string>
+    <string name="google_storage_bucket" translatable="false">zenflowmobile.firebasestorage.app</string>
+    <string name="project_id" translatable="false">zenflowmobile</string>
+</resources>

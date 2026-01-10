@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.zenflow.mobile.app-mergeDebugResources-27:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.zenflow.mobile.app-mergeDebugResources-38:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/muttakinrahman/.gradle/caches/9.2.1/transforms/bd5514837cc00f51e20f304f2e2d7b19/transformed/appcompat-1.6.1/res/values-night-v8/values-night-v8.xml",
+                    "source": "/Users/muttakinrahman/.gradle/caches/9.2.1/transforms/39c5feaa222b0c669c531e75426257c3/transformed/appcompat-1.6.1/res/values-night-v8/values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
