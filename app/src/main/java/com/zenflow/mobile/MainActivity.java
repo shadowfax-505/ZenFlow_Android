@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zenflow.mobile.analytics.AnalyticsLogger;
 import com.zenflow.mobile.auth.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,5 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btnSettings).setOnClickListener(v ->
                 startActivity(new Intent(this, SettingsActivity.class)));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AnalyticsLogger.logScreenView(this, "Main", getClass().getSimpleName());
     }
 }

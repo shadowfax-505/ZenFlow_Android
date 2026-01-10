@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zenflow.mobile.analytics.AnalyticsLogger;
 import com.zenflow.mobile.data.AppDatabase;
 
 public class AdminLoginActivity extends AppCompatActivity {
@@ -43,14 +44,17 @@ public class AdminLoginActivity extends AppCompatActivity {
 
             if (TextUtils.isEmpty(u) || TextUtils.isEmpty(p)) {
                 Toast.makeText(this, "Enter admin username and password", Toast.LENGTH_SHORT).show();
+                AnalyticsLogger.logAdminLogin(this, false);
                 return;
             }
 
             if (!AppDatabase.validateAdmin(this, u, p)) {
                 Toast.makeText(this, "Invalid admin credentials", Toast.LENGTH_SHORT).show();
+                AnalyticsLogger.logAdminLogin(this, false);
                 return;
             }
 
+            AnalyticsLogger.logAdminLogin(this, true);
             adminAuthed = true;
             registerPanel.setAlpha(1f);
             registerPanel.setEnabled(true);
@@ -77,6 +81,12 @@ public class AdminLoginActivity extends AppCompatActivity {
             etNewPassword.setText("");
             Toast.makeText(this, "User registered", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AnalyticsLogger.logScreenView(this, "Admin", getClass().getSimpleName());
     }
 
     private static void setEnabledRecursive(View root, boolean enabled) {

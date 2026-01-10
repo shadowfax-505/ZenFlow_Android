@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.zenflow.mobile.analytics.AnalyticsLogger;
 import com.zenflow.mobile.databinding.ActivityFocusBinding;
 
 public class FocusActivity extends AppCompatActivity {
@@ -58,5 +59,11 @@ public class FocusActivity extends AppCompatActivity {
     protected void onStop() {
         SettingsStore.prefs(this).unregisterOnSharedPreferenceChangeListener(prefListener);
         super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AnalyticsLogger.logScreenView(this, "Focus", getClass().getSimpleName());
     }
 }
