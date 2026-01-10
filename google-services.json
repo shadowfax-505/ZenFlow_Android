@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "323728134662",
+    "project_id": "zenflowmobile",
+    "storage_bucket": "zenflowmobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323728134662:android:38a75fc7b8f648c0b6e987",
+        "android_client_info": {
+          "package_name": "com.zenflow.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCdLI7dil3-XSw7YgkopNRDRVQypXJOqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

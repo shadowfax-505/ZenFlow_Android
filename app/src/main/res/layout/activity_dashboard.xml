@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black">
@@ -56,11 +57,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/appUsagePie"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:id="@+id/appUsageLegend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp"/>
+
         <LinearLayout
             android:id="@+id/appUsageChart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"/>
+
+        <TextView
+            android:id="@+id/todayUsage"
+            android:text="Today usage: 0 min"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/usageCategory"
+            android:text="Category: Healthy"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </ScrollView>

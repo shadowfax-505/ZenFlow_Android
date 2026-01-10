@@ -19,8 +19,16 @@ public abstract class AppDatabase extends RoomDatabase {
     private static final String KEY_ADMIN_USER = "admin_user";
     private static final String KEY_ADMIN_PASS = "admin_pass";
 
+    private static final String PREF = "zenflow_prefs";
+    private static final String KEY_USAGE_CUTBACK_MIN = "usage_cutback_min";     // default 60
+    private static final String KEY_USAGE_ADDICTED_MIN = "usage_addicted_min";   // default 120
+
     private static SharedPreferences authSp(Context c) {
         return c.getApplicationContext().getSharedPreferences(AUTH_PREF, Context.MODE_PRIVATE);
+    }
+
+    private static SharedPreferences sp(Context c) {
+        return c.getApplicationContext().getSharedPreferences(PREF, Context.MODE_PRIVATE);
     }
 
     public static void ensureDefaultAdmin(Context c) {
@@ -90,4 +98,36 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract SessionDao sessionDao();
+
+    public static int getCutBackThresholdMin(Context c) {
+        return sp(c).getInt(KEY_USAGE_CUTBACK_MIN, 60);
+    }
+
+    public static int getSeriouslyAddictedThresholdMin(Context c) {
+        return sp(c).getInt(KEY_USAGE_ADDICTED_MIN, 120);
+    }
+
+    /**
+     * Ensures addicted >= cutBack + 1 to keep ordering sane.
+     */
+    public static void setUsageThresholdsMin(Context c, int cutBackMin, int addictedMin) {
+        if (cutBackMin < 0) cutBackMin = 0;
+        if (addictedMin <= cutBackMin) addictedMin = cutBackMin + 1;
+
+        sp(c).edit()
+                .putInt(KEY_USAGE_CUTBACK_MIN, cutBackMin)
+                .putInt(KEY_USAGE_ADDICTED_MIN, addictedMin)
+                .apply();
+    }
+
+    /** Categorize based on today's total minutes. */
+    public static String categorizeDailyUsage(Context c, int minutesToday) {
+        int cutBack = getCutBackThresholdMin(c);
+        int addicted = getSeriouslyAddictedThresholdMin(c);
+
+        if (minutesToday >= addicted) return "Seriously addicted — stop using it";
+        if (minutesToday >= cutBack) return "Need to cut back — be more productive";
+        if (minutesToday >= Math.max(1, cutBack / 2)) return "Moderate — keep an eye on it";
+        return "Healthy — keep it up";
+    }
 }

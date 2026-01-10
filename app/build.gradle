@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
+
 }
 
 android {
@@ -39,4 +41,12 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.6.1'
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // Firebase (uses versions from the BoM)
+    implementation platform('com.google.firebase:firebase-bom:34.7.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    // Optional (commonly needed for login)
+    implementation 'com.google.firebase:firebase-auth'
 }

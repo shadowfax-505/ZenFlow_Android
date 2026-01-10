@@ -23,9 +23,21 @@ public class SettingsActivity extends AppCompatActivity {
         Button saveButton = findViewById(R.id.saveSettingsBtn);
         Switch switchAccount = findViewById(R.id.switchAccount);
 
+        TextView cutBackLabel = findViewById(R.id.cutBackLabel);
+        SeekBar cutBackSeek = findViewById(R.id.cutBackSeek);
+        TextView seriouslyAddictedLabel = findViewById(R.id.seriouslyAddictedLabel);
+        SeekBar seriouslyAddictedSeek = findViewById(R.id.seriouslyAddictedSeek);
+
         int savedMinutes = SettingsStore.getFocusDurationMinutes(this);
         focusSeek.setProgress(savedMinutes);
         focusDurationLabel.setText(savedMinutes + " minutes");
+
+        int cutBackMin = SettingsStore.getUsageCutBackMinutes(this);
+        int seriouslyMin = SettingsStore.getUsageSeriouslyAddictedMinutes(this);
+        cutBackSeek.setProgress(cutBackMin);
+        seriouslyAddictedSeek.setProgress(seriouslyMin);
+        cutBackLabel.setText(cutBackMin + " minutes");
+        seriouslyAddictedLabel.setText(seriouslyMin + " minutes");
 
         focusSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -34,6 +46,42 @@ public class SettingsActivity extends AppCompatActivity {
                 focusDurationLabel.setText(minutes + " minutes");
                 if (fromUser) {
                     SettingsStore.setFocusDurationMinutes(SettingsActivity.this, minutes);
+                }
+            }
+            @Override public void onStartTrackingTouch(SeekBar seekBar) { }
+            @Override public void onStopTrackingTouch(SeekBar seekBar) { }
+        });
+
+        cutBackSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int minutes = Math.max(1, progress);
+                cutBackLabel.setText(minutes + " minutes");
+                if (fromUser) {
+                    SettingsStore.setUsageCutBackMinutes(SettingsActivity.this, minutes);
+                    int currentSeriously = SettingsStore.getUsageSeriouslyAddictedMinutes(SettingsActivity.this);
+                    if (currentSeriously < minutes) {
+                        SettingsStore.setUsageSeriouslyAddictedMinutes(SettingsActivity.this, minutes);
+                        seriouslyAddictedSeek.setProgress(minutes);
+                        seriouslyAddictedLabel.setText(minutes + " minutes");
+                    }
+                }
+            }
+            @Override public void onStartTrackingTouch(SeekBar seekBar) { }
+            @Override public void onStopTrackingTouch(SeekBar seekBar) { }
+        });
+
+        seriouslyAddictedSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int cutBack = Math.max(1, cutBackSeek.getProgress());
+                int minutes = Math.max(cutBack, progress);
+                if (minutes != progress) {
+                    seriouslyAddictedSeek.setProgress(minutes);
+                }
+                seriouslyAddictedLabel.setText(minutes + " minutes");
+                if (fromUser) {
+                    SettingsStore.setUsageSeriouslyAddictedMinutes(SettingsActivity.this, minutes);
                 }
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -53,6 +101,13 @@ public class SettingsActivity extends AppCompatActivity {
         saveButton.setOnClickListener(v -> {
             int minutes = Math.max(1, focusSeek.getProgress());
             SettingsStore.setFocusDurationMinutes(this, minutes);
+
+            int cutBack = Math.max(1, cutBackSeek.getProgress());
+            SettingsStore.setUsageCutBackMinutes(this, cutBack);
+
+            int seriously = Math.max(cutBack, seriouslyAddictedSeek.getProgress());
+            SettingsStore.setUsageSeriouslyAddictedMinutes(this, seriously);
+
             Toast.makeText(this, "Settings saved", Toast.LENGTH_SHORT).show();
             finish();
         });

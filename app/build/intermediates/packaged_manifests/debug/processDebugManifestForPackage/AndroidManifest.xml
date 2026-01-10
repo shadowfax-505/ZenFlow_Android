@@ -22,6 +22,7 @@
         android:debuggable="true"
         android:extractNativeLibs="false"
         android:label="ZenFlow"
+        android:testOnly="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         <activity
             android:name="com.zenflow.mobile.LoginActivity"

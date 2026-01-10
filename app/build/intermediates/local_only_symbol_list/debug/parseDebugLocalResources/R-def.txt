@@ -1,6 +1,8 @@
 R_DEF: Internal format may change without notice
 local
 id appUsageChart
+id appUsageLegend
+id appUsagePie
 id btnAdmin
 id btnAdminLogin
 id btnDashboard
@@ -9,6 +11,8 @@ id btnLogin
 id btnRegisterUser
 id btnSettings
 id completedSessions
+id cutBackLabel
+id cutBackSeek
 id etAdminPass
 id etAdminUser
 id etNewPassword
@@ -22,13 +26,17 @@ id pauseResumeBtn
 id registerPanel
 id resetBtn
 id saveSettingsBtn
+id seriouslyAddictedLabel
+id seriouslyAddictedSeek
 id soundSwitch
 id switchAccount
 id timerText
+id todayUsage
 id totalSessions
 id tvHint
 id tvSubtitle
 id tvTitle
+id usageCategory
 id vibrationSwitch
 layout activity_admin_login
 layout activity_dashboard

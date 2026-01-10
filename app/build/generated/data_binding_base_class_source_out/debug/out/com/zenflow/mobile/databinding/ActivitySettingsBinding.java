@@ -23,6 +23,12 @@ public final class ActivitySettingsBinding implements ViewBinding {
   private final ScrollView rootView;
 
   @NonNull
+  public final TextView cutBackLabel;
+
+  @NonNull
+  public final SeekBar cutBackSeek;
+
+  @NonNull
   public final TextView focusDurationLabel;
 
   @NonNull
@@ -30,6 +36,12 @@ public final class ActivitySettingsBinding implements ViewBinding {
 
   @NonNull
   public final Button saveSettingsBtn;
+
+  @NonNull
+  public final TextView seriouslyAddictedLabel;
+
+  @NonNull
+  public final SeekBar seriouslyAddictedSeek;
 
   @NonNull
   public final Switch soundSwitch;
@@ -40,14 +52,19 @@ public final class ActivitySettingsBinding implements ViewBinding {
   @NonNull
   public final Switch vibrationSwitch;
 
-  private ActivitySettingsBinding(@NonNull ScrollView rootView,
-      @NonNull TextView focusDurationLabel, @NonNull SeekBar focusDurationSeek,
-      @NonNull Button saveSettingsBtn, @NonNull Switch soundSwitch, @NonNull Switch switchAccount,
-      @NonNull Switch vibrationSwitch) {
+  private ActivitySettingsBinding(@NonNull ScrollView rootView, @NonNull TextView cutBackLabel,
+      @NonNull SeekBar cutBackSeek, @NonNull TextView focusDurationLabel,
+      @NonNull SeekBar focusDurationSeek, @NonNull Button saveSettingsBtn,
+      @NonNull TextView seriouslyAddictedLabel, @NonNull SeekBar seriouslyAddictedSeek,
+      @NonNull Switch soundSwitch, @NonNull Switch switchAccount, @NonNull Switch vibrationSwitch) {
     this.rootView = rootView;
+    this.cutBackLabel = cutBackLabel;
+    this.cutBackSeek = cutBackSeek;
     this.focusDurationLabel = focusDurationLabel;
     this.focusDurationSeek = focusDurationSeek;
     this.saveSettingsBtn = saveSettingsBtn;
+    this.seriouslyAddictedLabel = seriouslyAddictedLabel;
+    this.seriouslyAddictedSeek = seriouslyAddictedSeek;
     this.soundSwitch = soundSwitch;
     this.switchAccount = switchAccount;
     this.vibrationSwitch = vibrationSwitch;
@@ -80,6 +97,18 @@ public final class ActivitySettingsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.cutBackLabel;
+      TextView cutBackLabel = ViewBindings.findChildViewById(rootView, id);
+      if (cutBackLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.cutBackSeek;
+      SeekBar cutBackSeek = ViewBindings.findChildViewById(rootView, id);
+      if (cutBackSeek == null) {
+        break missingId;
+      }
+
       id = R.id.focusDurationLabel;
       TextView focusDurationLabel = ViewBindings.findChildViewById(rootView, id);
       if (focusDurationLabel == null) {
@@ -95,6 +124,18 @@ public final class ActivitySettingsBinding implements ViewBinding {
       id = R.id.saveSettingsBtn;
       Button saveSettingsBtn = ViewBindings.findChildViewById(rootView, id);
       if (saveSettingsBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.seriouslyAddictedLabel;
+      TextView seriouslyAddictedLabel = ViewBindings.findChildViewById(rootView, id);
+      if (seriouslyAddictedLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.seriouslyAddictedSeek;
+      SeekBar seriouslyAddictedSeek = ViewBindings.findChildViewById(rootView, id);
+      if (seriouslyAddictedSeek == null) {
         break missingId;
       }
 
@@ -116,8 +157,9 @@ public final class ActivitySettingsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivitySettingsBinding((ScrollView) rootView, focusDurationLabel,
-          focusDurationSeek, saveSettingsBtn, soundSwitch, switchAccount, vibrationSwitch);
+      return new ActivitySettingsBinding((ScrollView) rootView, cutBackLabel, cutBackSeek,
+          focusDurationLabel, focusDurationSeek, saveSettingsBtn, seriouslyAddictedLabel,
+          seriouslyAddictedSeek, soundSwitch, switchAccount, vibrationSwitch);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

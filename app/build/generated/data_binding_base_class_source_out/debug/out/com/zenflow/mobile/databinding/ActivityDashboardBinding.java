@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.github.mikephil.charting.charts.PieChart;
 import com.zenflow.mobile.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -24,22 +25,40 @@ public final class ActivityDashboardBinding implements ViewBinding {
   public final LinearLayout appUsageChart;
 
   @NonNull
+  public final LinearLayout appUsageLegend;
+
+  @NonNull
+  public final PieChart appUsagePie;
+
+  @NonNull
   public final TextView completedSessions;
 
   @NonNull
   public final LinearLayout focusChart;
 
   @NonNull
+  public final TextView todayUsage;
+
+  @NonNull
   public final TextView totalSessions;
 
+  @NonNull
+  public final TextView usageCategory;
+
   private ActivityDashboardBinding(@NonNull ScrollView rootView,
-      @NonNull LinearLayout appUsageChart, @NonNull TextView completedSessions,
-      @NonNull LinearLayout focusChart, @NonNull TextView totalSessions) {
+      @NonNull LinearLayout appUsageChart, @NonNull LinearLayout appUsageLegend,
+      @NonNull PieChart appUsagePie, @NonNull TextView completedSessions,
+      @NonNull LinearLayout focusChart, @NonNull TextView todayUsage,
+      @NonNull TextView totalSessions, @NonNull TextView usageCategory) {
     this.rootView = rootView;
     this.appUsageChart = appUsageChart;
+    this.appUsageLegend = appUsageLegend;
+    this.appUsagePie = appUsagePie;
     this.completedSessions = completedSessions;
     this.focusChart = focusChart;
+    this.todayUsage = todayUsage;
     this.totalSessions = totalSessions;
+    this.usageCategory = usageCategory;
   }
 
   @Override
@@ -75,6 +94,18 @@ public final class ActivityDashboardBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.appUsageLegend;
+      LinearLayout appUsageLegend = ViewBindings.findChildViewById(rootView, id);
+      if (appUsageLegend == null) {
+        break missingId;
+      }
+
+      id = R.id.appUsagePie;
+      PieChart appUsagePie = ViewBindings.findChildViewById(rootView, id);
+      if (appUsagePie == null) {
+        break missingId;
+      }
+
       id = R.id.completedSessions;
       TextView completedSessions = ViewBindings.findChildViewById(rootView, id);
       if (completedSessions == null) {
@@ -87,14 +118,26 @@ public final class ActivityDashboardBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.todayUsage;
+      TextView todayUsage = ViewBindings.findChildViewById(rootView, id);
+      if (todayUsage == null) {
+        break missingId;
+      }
+
       id = R.id.totalSessions;
       TextView totalSessions = ViewBindings.findChildViewById(rootView, id);
       if (totalSessions == null) {
         break missingId;
       }
 
-      return new ActivityDashboardBinding((ScrollView) rootView, appUsageChart, completedSessions,
-          focusChart, totalSessions);
+      id = R.id.usageCategory;
+      TextView usageCategory = ViewBindings.findChildViewById(rootView, id);
+      if (usageCategory == null) {
+        break missingId;
+      }
+
+      return new ActivityDashboardBinding((ScrollView) rootView, appUsageChart, appUsageLegend,
+          appUsagePie, completedSessions, focusChart, todayUsage, totalSessions, usageCategory);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
