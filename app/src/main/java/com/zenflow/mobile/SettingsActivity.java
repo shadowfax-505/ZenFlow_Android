@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zenflow.mobile.analytics.AnalyticsLogger;
 import com.zenflow.mobile.auth.SessionManager;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -46,6 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
                 focusDurationLabel.setText(minutes + " minutes");
                 if (fromUser) {
                     SettingsStore.setFocusDurationMinutes(SettingsActivity.this, minutes);
+                    AnalyticsLogger.logSettingsChanged(SettingsActivity.this, SettingsStore.KEY_FOCUS_DURATION_MIN);
                 }
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -59,11 +61,14 @@ public class SettingsActivity extends AppCompatActivity {
                 cutBackLabel.setText(minutes + " minutes");
                 if (fromUser) {
                     SettingsStore.setUsageCutBackMinutes(SettingsActivity.this, minutes);
+                    AnalyticsLogger.logSettingsChanged(SettingsActivity.this, SettingsStore.KEY_USAGE_CUT_BACK_MIN);
+
                     int currentSeriously = SettingsStore.getUsageSeriouslyAddictedMinutes(SettingsActivity.this);
                     if (currentSeriously < minutes) {
                         SettingsStore.setUsageSeriouslyAddictedMinutes(SettingsActivity.this, minutes);
                         seriouslyAddictedSeek.setProgress(minutes);
                         seriouslyAddictedLabel.setText(minutes + " minutes");
+                        AnalyticsLogger.logSettingsChanged(SettingsActivity.this, SettingsStore.KEY_USAGE_SERIOUSLY_ADDICTED_MIN);
                     }
                 }
             }
@@ -82,6 +87,7 @@ public class SettingsActivity extends AppCompatActivity {
                 seriouslyAddictedLabel.setText(minutes + " minutes");
                 if (fromUser) {
                     SettingsStore.setUsageSeriouslyAddictedMinutes(SettingsActivity.this, minutes);
+                    AnalyticsLogger.logSettingsChanged(SettingsActivity.this, SettingsStore.KEY_USAGE_SERIOUSLY_ADDICTED_MIN);
                 }
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -91,6 +97,7 @@ public class SettingsActivity extends AppCompatActivity {
         switchAccount.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (!isChecked) return;
 
+            AnalyticsLogger.logSettingsChanged(this, "switch_account");
             SessionManager.logout(this);
 
             Intent i = new Intent(this, LoginActivity.class);
@@ -111,5 +118,11 @@ public class SettingsActivity extends AppCompatActivity {
             Toast.makeText(this, "Settings saved", Toast.LENGTH_SHORT).show();
             finish();
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AnalyticsLogger.logScreenView(this, "Settings", getClass().getSimpleName());
     }
 }

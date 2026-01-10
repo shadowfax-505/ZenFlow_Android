@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.zenflow.mobile.analytics.AnalyticsLogger;
 import com.zenflow.mobile.data.AppDatabase;
 import com.zenflow.mobile.data.SessionEntity;
 import com.zenflow.mobile.service.AppUsageItem;
@@ -92,6 +93,12 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         refreshHandler.removeCallbacks(refreshRunnable);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AnalyticsLogger.logScreenView(this, "Dashboard", getClass().getSimpleName());
     }
 
     private void loadSessionStats() {
@@ -207,7 +214,7 @@ public class DashboardActivity extends AppCompatActivity {
             UsageCategory cat = policy.categorize(i.timeForegroundMs);
 
             TextView row = new TextView(this);
-            row.setText(i.appLabel + ": " + mins + " mins" + "  •  " + cat.label);
+            row.setText(i.appLabel + ": " + mins + " mins" + "  \u2022  " + cat.label);
             row.setTextColor(cat == UsageCategory.SERIOUSLY_ADDICTED ? 0xFFFF5252
                     : (cat == UsageCategory.CUT_BACK ? 0xFFFFCA28 : 0xFFFFFFFF));
             row.setPadding(0, dpToPx(6), 0, dpToPx(6));

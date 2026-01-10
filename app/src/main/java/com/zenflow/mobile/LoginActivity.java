@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zenflow.mobile.analytics.AnalyticsLogger;
 import com.zenflow.mobile.auth.SessionManager;
 import com.zenflow.mobile.data.AppDatabase;
 
@@ -46,10 +47,18 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             SessionManager.login(this, username);
+            AnalyticsLogger.logLogin(this, "local_db", username == null ? null : username.length());
+
             startActivity(new Intent(this, MainActivity.class));
             finish();
         });
 
         btnAdmin.setOnClickListener(v -> startActivity(new Intent(this, com.zenflow.mobile.AdminLoginActivity.class)));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AnalyticsLogger.logScreenView(this, "Login", getClass().getSimpleName());
     }
 }

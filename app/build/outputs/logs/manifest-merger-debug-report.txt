@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:1:1-26:12
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:1:1-27:12
 MERGED from [androidx.databinding:viewbinding:8.3.2] /Users/muttakinrahman/.gradle/caches/9.2.1/transforms/e63fc692f3cba5b0190219e3bacea62b/transformed/jetified-viewbinding-8.3.2/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /Users/muttakinrahman/.gradle/caches/9.2.1/transforms/d3b9d22a6fc6e1dff921f87c3e5fcad1/transformed/constraintlayout-2.1.4/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/muttakinrahman/.gradle/caches/9.2.1/transforms/e87b18ea01a7dbb210e81a410b287136/transformed/jetified-appcompat-resources-1.6.1/AndroidManifest.xml:17:1-22:12
@@ -95,8 +95,8 @@ ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidMan
 	android:name
 		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:4:22-74
 application
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:6:5-25:19
-INJECTED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:6:5-25:19
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:6:5-26:19
+INJECTED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:6:5-26:19
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /Users/muttakinrahman/.gradle/caches/9.2.1/transforms/d3b9d22a6fc6e1dff921f87c3e5fcad1/transformed/constraintlayout-2.1.4/AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /Users/muttakinrahman/.gradle/caches/9.2.1/transforms/d3b9d22a6fc6e1dff921f87c3e5fcad1/transformed/constraintlayout-2.1.4/AndroidManifest.xml:9:5-20
 MERGED from [androidx.room:room-runtime:2.6.1] /Users/muttakinrahman/.gradle/caches/9.2.1/transforms/745a33905b847b387a6abf7e0af63f69/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
@@ -164,45 +164,47 @@ MERGED from [com.google.android.play:core-common:2.0.3] /Users/muttakinrahman/.g
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.9.0] /Users/muttakinrahman/.gradle/caches/9.2.1/transforms/9e7d5a3958c28e921901a97002740f9d/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
 	android:label
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:7:9-32
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:8:9-32
 	android:theme
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:8:9-67
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:9:9-67
+	android:name
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:7:9-35
 activity#com.zenflow.mobile.LoginActivity
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:10:9-17:20
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:11:9-18:20
 	android:exported
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:12:13-36
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:13:13-36
 	android:name
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:11:13-42
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:12:13-42
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:13:13-16:29
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:14:13-17:29
 action#android.intent.action.MAIN
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:14:17-68
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:15:17-68
 	android:name
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:14:25-66
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:15:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:15:17-76
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:16:17-76
 	android:name
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:15:27-74
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:16:27-74
 activity#com.zenflow.mobile.AdminLoginActivity
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:18:9-56
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:19:9-56
 	android:name
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:18:19-53
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:19:19-53
 activity#com.zenflow.mobile.SettingsActivity
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:20:9-54
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:21:9-54
 	android:name
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:20:19-51
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:21:19-51
 activity#com.zenflow.mobile.DashboardActivity
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:21:9-55
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:22:9-55
 	android:name
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:21:19-52
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:22:19-52
 activity#com.zenflow.mobile.FocusActivity
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:22:9-51
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:23:9-51
 	android:name
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:22:19-48
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:23:19-48
 activity#com.zenflow.mobile.MainActivity
-ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:23:9-50
+ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:24:9-50
 	android:name
-		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:23:19-47
+		ADDED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml:24:19-47
 uses-sdk
 INJECTED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/muttakinrahman/Downloads/ZenFlowMobile/app/src/main/AndroidManifest.xml
