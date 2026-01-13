@@ -12,8 +12,16 @@
         "source": "com.zenflow.mobile.app-main-42:/layout/activity_dashboard.xml"
     },
     {
+        "merged": "com.zenflow.mobile.app-debug-40:/layout_activity_history.xml.flat",
+        "source": "com.zenflow.mobile.app-main-42:/layout/activity_history.xml"
+    },
+    {
         "merged": "com.zenflow.mobile.app-debug-40:/layout_activity_login.xml.flat",
         "source": "com.zenflow.mobile.app-main-42:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.zenflow.mobile.app-debug-40:/layout_activity_reminders.xml.flat",
+        "source": "com.zenflow.mobile.app-main-42:/layout/activity_reminders.xml"
     },
     {
         "merged": "com.zenflow.mobile.app-debug-40:/layout_activity_main.xml.flat",

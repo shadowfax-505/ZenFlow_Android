@@ -26,13 +26,22 @@ public final class ActivityMainBinding implements ViewBinding {
   public final Button btnFocus;
 
   @NonNull
+  public final Button btnHistory;
+
+  @NonNull
+  public final Button btnReminders;
+
+  @NonNull
   public final Button btnSettings;
 
   private ActivityMainBinding(@NonNull LinearLayout rootView, @NonNull Button btnDashboard,
-      @NonNull Button btnFocus, @NonNull Button btnSettings) {
+      @NonNull Button btnFocus, @NonNull Button btnHistory, @NonNull Button btnReminders,
+      @NonNull Button btnSettings) {
     this.rootView = rootView;
     this.btnDashboard = btnDashboard;
     this.btnFocus = btnFocus;
+    this.btnHistory = btnHistory;
+    this.btnReminders = btnReminders;
     this.btnSettings = btnSettings;
   }
 
@@ -75,13 +84,26 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnHistory;
+      Button btnHistory = ViewBindings.findChildViewById(rootView, id);
+      if (btnHistory == null) {
+        break missingId;
+      }
+
+      id = R.id.btnReminders;
+      Button btnReminders = ViewBindings.findChildViewById(rootView, id);
+      if (btnReminders == null) {
+        break missingId;
+      }
+
       id = R.id.btnSettings;
       Button btnSettings = ViewBindings.findChildViewById(rootView, id);
       if (btnSettings == null) {
         break missingId;
       }
 
-      return new ActivityMainBinding((LinearLayout) rootView, btnDashboard, btnFocus, btnSettings);
+      return new ActivityMainBinding((LinearLayout) rootView, btnDashboard, btnFocus, btnHistory,
+          btnReminders, btnSettings);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

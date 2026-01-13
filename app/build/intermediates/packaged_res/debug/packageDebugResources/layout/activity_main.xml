@@ -47,6 +47,24 @@
 
 
     <Button
+        android:id="@+id/btnReminders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:paddingVertical="16dp"
+        android:text="Reminders"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:paddingVertical="16dp"
+        android:text="History"
+        android:textSize="16sp" />
+
+    <Button
         android:id="@+id/btnSettings"
         android:text="Settings"
         android:textSize="16sp"

@@ -28,20 +28,24 @@ import javax.annotation.processing.Generated;
 public final class AppDatabase_Impl extends AppDatabase {
   private volatile SessionDao _sessionDao;
 
+  private volatile ReminderDao _reminderDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `sessions` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `startTs` INTEGER NOT NULL, `endTs` INTEGER, `type` TEXT, `completed` INTEGER NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `reminders` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `dateEpochDay` INTEGER NOT NULL, `createdTs` INTEGER NOT NULL, `text` TEXT)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f3969c91ab9fbd3e81cfb5701010b32c')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cc240ff1c8291c9d6077172d98d59452')");
       }
 
       @Override
       public void dropAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS `sessions`");
+        db.execSQL("DROP TABLE IF EXISTS `reminders`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -100,9 +104,23 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoSessions + "\n"
                   + " Found:\n" + _existingSessions);
         }
+        final HashMap<String, TableInfo.Column> _columnsReminders = new HashMap<String, TableInfo.Column>(4);
+        _columnsReminders.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsReminders.put("dateEpochDay", new TableInfo.Column("dateEpochDay", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsReminders.put("createdTs", new TableInfo.Column("createdTs", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsReminders.put("text", new TableInfo.Column("text", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysReminders = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesReminders = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoReminders = new TableInfo("reminders", _columnsReminders, _foreignKeysReminders, _indicesReminders);
+        final TableInfo _existingReminders = TableInfo.read(db, "reminders");
+        if (!_infoReminders.equals(_existingReminders)) {
+          return new RoomOpenHelper.ValidationResult(false, "reminders(com.zenflow.mobile.data.ReminderEntity).\n"
+                  + " Expected:\n" + _infoReminders + "\n"
+                  + " Found:\n" + _existingReminders);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "f3969c91ab9fbd3e81cfb5701010b32c", "7cc2e87bae5d6e6452c6672255231f7a");
+    }, "cc240ff1c8291c9d6077172d98d59452", "0180275ced701959683ffcbc3ab6922a");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -113,7 +131,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "sessions");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "sessions","reminders");
   }
 
   @Override
@@ -123,6 +141,7 @@ public final class AppDatabase_Impl extends AppDatabase {
     try {
       super.beginTransaction();
       _db.execSQL("DELETE FROM `sessions`");
+      _db.execSQL("DELETE FROM `reminders`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -138,6 +157,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected Map<Class<?>, List<Class<?>>> getRequiredTypeConverters() {
     final HashMap<Class<?>, List<Class<?>>> _typeConvertersMap = new HashMap<Class<?>, List<Class<?>>>();
     _typeConvertersMap.put(SessionDao.class, SessionDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(ReminderDao.class, ReminderDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -166,6 +186,20 @@ public final class AppDatabase_Impl extends AppDatabase {
           _sessionDao = new SessionDao_Impl(this);
         }
         return _sessionDao;
+      }
+    }
+  }
+
+  @Override
+  public ReminderDao reminderDao() {
+    if (_reminderDao != null) {
+      return _reminderDao;
+    } else {
+      synchronized(this) {
+        if(_reminderDao == null) {
+          _reminderDao = new ReminderDao_Impl(this);
+        }
+        return _reminderDao;
       }
     }
   }

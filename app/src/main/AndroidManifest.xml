@@ -20,6 +20,8 @@
 
         <activity android:name=".SettingsActivity" />
         <activity android:name=".DashboardActivity" />
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".RemindersActivity" />
         <activity android:name=".FocusActivity" />
         <activity android:name=".MainActivity" />
 

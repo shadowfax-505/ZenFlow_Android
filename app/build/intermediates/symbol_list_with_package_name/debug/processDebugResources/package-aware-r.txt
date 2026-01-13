@@ -1051,12 +1051,16 @@ id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
+id btnAddReminder
 id btnAdmin
 id btnAdminLogin
 id btnDashboard
 id btnFocus
+id btnHistory
 id btnLogin
+id btnPickDate
 id btnRegisterUser
+id btnReminders
 id btnSettings
 id buttonPanel
 id cache_measures
@@ -1133,6 +1137,7 @@ id graph_wrap
 id group_divider
 id grouping
 id groups
+id historyContainer
 id home
 id homeAsUp
 id honorRequest
@@ -1196,6 +1201,8 @@ id radio
 id ratio
 id rectangles
 id registerPanel
+id reminderInput
+id remindersForDateContainer
 id resetBtn
 id reverseSawtooth
 id right
@@ -1218,6 +1225,7 @@ id search_plate
 id search_src_text
 id search_voice_btn
 id select_dialog_listview
+id selectedDateText
 id seriouslyAddictedLabel
 id seriouslyAddictedSeek
 id sharedValueSet
@@ -1289,6 +1297,7 @@ id tvTitle
 id unchecked
 id uniform
 id up
+id upcomingRemindersContainer
 id usageCategory
 id useLogo
 id vertical_only
@@ -1352,8 +1361,10 @@ layout abc_tooltip
 layout activity_admin_login
 layout activity_dashboard
 layout activity_focus
+layout activity_history
 layout activity_login
 layout activity_main
+layout activity_reminders
 layout activity_settings
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row

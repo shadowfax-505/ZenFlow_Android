@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {SessionEntity.class}, version = 1)
+@Database(entities = {SessionEntity.class, ReminderEntity.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -92,12 +94,16 @@ public abstract class AppDatabase extends RoomDatabase {
                     c.getApplicationContext(),
                     AppDatabase.class,
                     "zenflow.db"
-            ).build();
+            )
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return INSTANCE;
     }
 
     public abstract SessionDao sessionDao();
+
+    public abstract ReminderDao reminderDao();
 
     public static int getCutBackThresholdMin(Context c) {
         return sp(c).getInt(KEY_USAGE_CUTBACK_MIN, 60);
@@ -107,9 +113,6 @@ public abstract class AppDatabase extends RoomDatabase {
         return sp(c).getInt(KEY_USAGE_ADDICTED_MIN, 120);
     }
 
-    /**
-     * Ensures addicted >= cutBack + 1 to keep ordering sane.
-     */
     public static void setUsageThresholdsMin(Context c, int cutBackMin, int addictedMin) {
         if (cutBackMin < 0) cutBackMin = 0;
         if (addictedMin <= cutBackMin) addictedMin = cutBackMin + 1;
@@ -120,7 +123,6 @@ public abstract class AppDatabase extends RoomDatabase {
                 .apply();
     }
 
-    /** Categorize based on today's total minutes. */
     public static String categorizeDailyUsage(Context c, int minutesToday) {
         int cutBack = getCutBackThresholdMin(c);
         int addicted = getSeriouslyAddictedThresholdMin(c);
