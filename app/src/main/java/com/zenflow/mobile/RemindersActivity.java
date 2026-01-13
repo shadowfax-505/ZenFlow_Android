@@ -157,6 +157,7 @@ public class RemindersActivity extends AppCompatActivity {
         }).start();
     }
 
+
     private void renderReminderList(LinearLayout container, List<ReminderEntity> list, long epochDay) {
         if (container == null || isFinishing() || isDestroyed()) return;
         container.removeAllViews();
