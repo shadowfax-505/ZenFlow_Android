@@ -31,10 +31,7 @@ import com.zenflow.mobile.service.UsageCategory;
 import com.zenflow.mobile.service.UsageCategoryPolicy;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -44,55 +41,105 @@ public class DashboardActivity extends AppCompatActivity {
     private LinearLayout appUsageChart;
     private PieChart appUsagePie;
     private LinearLayout appUsageLegend;
+    private TextView todayUsageText;
+    private TextView usageCategoryText;
 
     private final Handler refreshHandler = new Handler(Looper.getMainLooper());
     private final Runnable refreshRunnable = new Runnable() {
         @Override
         public void run() {
-            loadSessionStats();
-            viewModel.refresh();
-            refreshHandler.postDelayed(this, 60_000);
+            try {
+                loadSessionStats();
+                if (viewModel != null) viewModel.refresh();
+            } catch (Throwable ignored) {
+            }
+            try {
+                refreshHandler.postDelayed(this, 60_000);
+            } catch (Throwable ignored) {
+            }
         }
     };
 
     private DashboardViewModel viewModel;
 
+    private void safeRenderError(String message) {
+        runOnUiThread(() -> {
+            try {
+                if (appUsageLegend != null) {
+                    appUsageLegend.removeAllViews();
+                    TextView t = new TextView(this);
+                    t.setText(message);
+                    t.setTextColor(0xFFFF5252);
+                    t.setPadding(0, dpToPx(8), 0, dpToPx(8));
+                    appUsageLegend.addView(t);
+                }
+                if (appUsagePie != null) {
+                    appUsagePie.clear();
+                    appUsagePie.invalidate();
+                }
+            } catch (Throwable ignored) {
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        try {
+            setContentView(R.layout.activity_dashboard);
 
-        totalSessionsText = findViewById(R.id.totalSessions);
-        completedSessionsText = findViewById(R.id.completedSessions);
-        focusChart = findViewById(R.id.focusChart);
-        appUsageChart = findViewById(R.id.appUsageChart);
-        appUsagePie = findViewById(R.id.appUsagePie);
-        appUsageLegend = findViewById(R.id.appUsageLegend);
+            totalSessionsText = findViewById(R.id.totalSessions);
+            completedSessionsText = findViewById(R.id.completedSessions);
+            focusChart = findViewById(R.id.focusChart);
+            appUsageChart = findViewById(R.id.appUsageChart);
+            appUsagePie = findViewById(R.id.appUsagePie);
+            appUsageLegend = findViewById(R.id.appUsageLegend);
+            todayUsageText = findViewById(R.id.todayUsage);
+            usageCategoryText = findViewById(R.id.usageCategory);
 
-        setupPieChart();
+            if (appUsagePie != null) setupPieChart();
 
-        viewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
-        viewModel.getHasUsageAccess().observe(this, allowed -> {
-            if (allowed == null) return;
-            if (!allowed) showUsagePermissionRow();
-        });
-        viewModel.getTopApps().observe(this, this::renderAppUsagePie);
+            viewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+            viewModel.getHasUsageAccess().observe(this, allowed -> {
+                try {
+                    if (allowed == null) return;
+                    if (!allowed) showUsagePermissionRow();
+                } catch (Throwable t) {
+                    safeRenderError("Usage access check failed");
+                }
+            });
+            viewModel.getTopApps().observe(this, usage -> {
+                try {
+                    renderAppUsagePie(usage);
+                } catch (Throwable t) {
+                    safeRenderError("Failed to render usage chart");
+                }
+            });
 
-        loadSessionStats();
-        viewModel.refresh();
+            loadSessionStats();
+            viewModel.refresh();
+        } catch (Throwable t) {
+            safeRenderError("Dashboard failed to start");
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        refreshHandler.removeCallbacks(refreshRunnable);
-        refreshHandler.postDelayed(refreshRunnable, 60_000);
+        try {
+            refreshHandler.removeCallbacks(refreshRunnable);
+            refreshHandler.postDelayed(refreshRunnable, 60_000);
+        } catch (Throwable ignored) {
+        }
     }
 
     @Override
     protected void onStop() {
+        try {
+            refreshHandler.removeCallbacks(refreshRunnable);
+        } catch (Throwable ignored) {
+        }
         super.onStop();
-        refreshHandler.removeCallbacks(refreshRunnable);
     }
 
     @Override
@@ -103,31 +150,57 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void loadSessionStats() {
         new Thread(() -> {
-            long now = System.currentTimeMillis();
-            long dayAgo = now - (24 * 60 * 60 * 1000);
+            try {
+                long now = System.currentTimeMillis();
+                long dayAgo = now - (24L * 60L * 60L * 1000L);
 
-            List<SessionEntity> sessions = AppDatabase.get(this).sessionDao().getAll();
-            List<SessionEntity> last24hSessions = sessions.stream()
-                    .filter(s -> s.startTs >= dayAgo)
-                    .collect(Collectors.toList());
+                List<SessionEntity> sessions = AppDatabase.get(this).sessionDao().getAll();
 
-            long total = last24hSessions.size();
-            long completed = last24hSessions.stream().filter(s -> s.completed).count();
-
-            long[] buckets = new long[6];
-            for (SessionEntity s : last24hSessions) {
-                if (s.endTs == null) continue;
-                int bucketIdx = (int) ((s.startTs - dayAgo) / (4 * 60 * 60 * 1000));
-                if (bucketIdx >= 0 && bucketIdx < 6) {
-                    buckets[bucketIdx] += (s.endTs - s.startTs);
+                List<SessionEntity> last24hSessions = new ArrayList<>();
+                if (sessions != null) {
+                    for (SessionEntity s : sessions) {
+                        if (s != null && s.startTs >= dayAgo) {
+                            last24hSessions.add(s);
+                        }
+                    }
                 }
-            }
 
-            runOnUiThread(() -> {
-                totalSessionsText.setText("Last 24h Sessions: " + total);
-                completedSessionsText.setText("Completed: " + completed);
-                renderFocusChart(buckets);
-            });
+                long total = last24hSessions.size();
+                long completed = 0;
+                for (SessionEntity s : last24hSessions) {
+                    if (s != null && s.completed) completed++;
+                }
+
+                long[] buckets = new long[6];
+                for (SessionEntity s : last24hSessions) {
+                    if (s == null || s.endTs == null) continue;
+                    int bucketIdx = (int) ((s.startTs - dayAgo) / (4L * 60L * 60L * 1000L));
+                    if (bucketIdx >= 0 && bucketIdx < 6) {
+                        long dur = s.endTs - s.startTs;
+                        if (dur > 0) buckets[bucketIdx] += dur;
+                    }
+                }
+
+                final long totalFinal = total;
+                final long completedFinal = completed;
+
+                runOnUiThread(() -> {
+                    try {
+                        if (totalSessionsText != null) {
+                            totalSessionsText.setText("Last 24h Sessions: " + totalFinal);
+                        }
+                        if (completedSessionsText != null) {
+                            completedSessionsText.setText("Completed: " + completedFinal);
+                        }
+                        if (focusChart != null) {
+                            renderFocusChart(buckets);
+                        }
+                    } catch (Throwable ignored) {
+                    }
+                });
+            } catch (Throwable t) {
+                safeRenderError("Failed to load session stats");
+            }
         }).start();
     }
 
@@ -143,31 +216,46 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void showUsagePermissionRow() {
-        appUsageLegend.removeAllViews();
-        appUsageChart.removeAllViews();
+        try {
+            if (appUsageLegend != null) appUsageLegend.removeAllViews();
+            if (appUsageChart != null) appUsageChart.removeAllViews();
 
-        TextView msg = new TextView(this);
-        msg.setText("Usage access is required to show app usage. Tap to enable.");
-        msg.setTextColor(0xFFAAAAAA);
-        msg.setPadding(0, dpToPx(8), 0, dpToPx(8));
-        msg.setOnClickListener(v -> startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)));
-        appUsageLegend.addView(msg);
+            TextView msg = new TextView(this);
+            msg.setText("Usage access is required to show app usage. Tap to enable.");
+            msg.setTextColor(0xFFAAAAAA);
+            msg.setPadding(0, dpToPx(8), 0, dpToPx(8));
+            msg.setOnClickListener(v -> {
+                try {
+                    startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+                } catch (Throwable ignored) {
+                }
+            });
+            if (appUsageLegend != null) appUsageLegend.addView(msg);
 
-        appUsagePie.clear();
-        appUsagePie.invalidate();
+            if (appUsagePie != null) {
+                appUsagePie.clear();
+                appUsagePie.invalidate();
+            }
+        } catch (Throwable t) {
+            safeRenderError("Unable to open usage permission prompt");
+        }
     }
 
     private void renderAppUsagePie(List<AppUsageItem> usage) {
-        appUsageLegend.removeAllViews();
-        appUsageChart.removeAllViews();
+        if (appUsageLegend != null) appUsageLegend.removeAllViews();
+        if (appUsageChart != null) appUsageChart.removeAllViews();
 
         if (usage == null || usage.isEmpty()) {
             TextView none = new TextView(this);
             none.setText("No usage data. Check permissions.");
             none.setTextColor(0xFFAAAAAA);
-            appUsageLegend.addView(none);
-            appUsagePie.clear();
-            appUsagePie.invalidate();
+            if (appUsageLegend != null) appUsageLegend.addView(none);
+            if (appUsagePie != null) {
+                appUsagePie.clear();
+                appUsagePie.invalidate();
+            }
+            if (todayUsageText != null) todayUsageText.setText("Today usage: 0 min");
+            if (usageCategoryText != null) usageCategoryText.setText("Category: -");
             return;
         }
 
@@ -179,6 +267,11 @@ public class DashboardActivity extends AppCompatActivity {
         for (AppUsageItem i : usage) totalMs += i.timeForegroundMs;
         if (totalMs <= 0) totalMs = 1;
 
+        long minutesToday = totalMs / 60000;
+        if (todayUsageText != null) todayUsageText.setText("Today usage: " + minutesToday + " min");
+        String category = AppDatabase.categorizeDailyUsage(this, (int) minutesToday);
+        if (usageCategoryText != null) usageCategoryText.setText("Category: " + category);
+
         List<PieEntry> entries = new ArrayList<>();
         for (AppUsageItem i : usage) {
             float pct = (i.timeForegroundMs * 100f) / (float) totalMs;
@@ -186,26 +279,28 @@ public class DashboardActivity extends AppCompatActivity {
             entries.add(new PieEntry(pct, i.appLabel));
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "");
-        dataSet.setSliceSpace(2f);
-        dataSet.setColors(new int[]{
-                0xFF42A5F5,
-                0xFF66BB6A,
-                0xFFFFCA28,
-                0xFFEF5350,
-                0xFFAB47BC,
-                0xFF26C6DA,
-                0xFF8D6E63,
-                0xFF7E57C2
-        });
-        dataSet.setValueTextColor(0xFFFFFFFF);
-        dataSet.setValueTextSize(12f);
+        if (appUsagePie != null) {
+            PieDataSet dataSet = new PieDataSet(entries, "");
+            dataSet.setSliceSpace(2f);
+            dataSet.setColors(new int[]{
+                    0xFF42A5F5,
+                    0xFF66BB6A,
+                    0xFFFFCA28,
+                    0xFFEF5350,
+                    0xFFAB47BC,
+                    0xFF26C6DA,
+                    0xFF8D6E63,
+                    0xFF7E57C2
+            });
+            dataSet.setValueTextColor(0xFFFFFFFF);
+            dataSet.setValueTextSize(12f);
 
-        PieData data = new PieData(dataSet);
-        data.setValueFormatter(new PercentFormatter(appUsagePie));
+            PieData data = new PieData(dataSet);
+            data.setValueFormatter(new PercentFormatter(appUsagePie));
 
-        appUsagePie.setData(data);
-        appUsagePie.invalidate();
+            appUsagePie.setData(data);
+            appUsagePie.invalidate();
+        }
 
         for (AppUsageItem i : usage) {
             long mins = i.timeForegroundMs / 60000;
@@ -218,7 +313,7 @@ public class DashboardActivity extends AppCompatActivity {
             row.setTextColor(cat == UsageCategory.SERIOUSLY_ADDICTED ? 0xFFFF5252
                     : (cat == UsageCategory.CUT_BACK ? 0xFFFFCA28 : 0xFFFFFFFF));
             row.setPadding(0, dpToPx(6), 0, dpToPx(6));
-            appUsageLegend.addView(row);
+            if (appUsageLegend != null) appUsageLegend.addView(row);
         }
     }
 

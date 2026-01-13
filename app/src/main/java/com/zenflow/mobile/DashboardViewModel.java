@@ -20,7 +20,7 @@ public class DashboardViewModel extends AndroidViewModel {
     private final ExecutorService io = Executors.newSingleThreadExecutor();
 
     private final MutableLiveData<List<AppUsageItem>> topApps = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> hasUsageAccess = new MutableLiveData<>(true);
+    private final MutableLiveData<Boolean> hasUsageAccess = new MutableLiveData<>(false);
 
     public DashboardViewModel(@NonNull Application application) {
         super(application);
@@ -37,13 +37,18 @@ public class DashboardViewModel extends AndroidViewModel {
 
     public void refresh() {
         io.execute(() -> {
-            boolean allowed = appUsageRepository.hasUsageAccess();
-            hasUsageAccess.postValue(allowed);
-            if (!allowed) {
+            try {
+                boolean allowed = appUsageRepository.hasUsageAccess();
+                hasUsageAccess.postValue(allowed);
+                if (!allowed) {
+                    topApps.postValue(null);
+                    return;
+                }
+                topApps.postValue(appUsageRepository.getTopUsageLast24h(8));
+            } catch (Throwable t) {
+                hasUsageAccess.postValue(false);
                 topApps.postValue(null);
-                return;
             }
-            topApps.postValue(appUsageRepository.getTopUsageLast24h(8));
         });
     }
 
@@ -52,4 +57,3 @@ public class DashboardViewModel extends AndroidViewModel {
         io.shutdownNow();
     }
 }
-

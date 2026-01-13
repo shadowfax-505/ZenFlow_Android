@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnDashboard).setOnClickListener(v ->
                 startActivity(new Intent(this, DashboardActivity.class)));
 
+        findViewById(R.id.btnHistory).setOnClickListener(v ->
+                startActivity(new Intent(this, HistoryActivity.class)));
+
+        findViewById(R.id.btnReminders).setOnClickListener(v ->
+                startActivity(new Intent(this, RemindersActivity.class)));
+
         findViewById(R.id.btnSettings).setOnClickListener(v ->
                 startActivity(new Intent(this, SettingsActivity.class)));
     }
